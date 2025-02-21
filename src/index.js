@@ -4,10 +4,19 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
+// ccs files
+import "react-toastify/ReactToastify.css"
+import "bootstrap-icons/font/bootstrap-icons.css"
+
+// app provider component
+import AppProvider from './Context/AppProvider';
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App />
+    <AppProvider>
+      <App />
+    </AppProvider>
   </React.StrictMode>
 );
 

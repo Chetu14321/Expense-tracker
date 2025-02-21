@@ -1,38 +1,198 @@
-.App {
+.container {
+  max-width: 100%;
+  margin: 0% auto;
+}
+
+.container .title {
   text-align: center;
+  position: relative;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.title h1 {
+  color: #3b3b3b;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.title .underline {
+  height: 4px;
+  width: 70%;
+  background-image: linear-gradient(to right bottom,#20bf65,#01baef);
+  border-radius: 10px;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.dashboard {
+  background-image: linear-gradient(to right bottom,#20bf65,#01baef);
+  width: 50vw;
+  padding: 10px;
+  margin: 0% auto;
+  border-radius: 10px;
+  margin-top: 1rem;
+  user-select: none;
+  line-height: 1.5rem;
+}
+
+.dashboard .dashboard-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.dashboard p {
+  font-weight: 800;
+}
+
+.dashboard #balance {color:  #fff;}
+.dashboard #income {color:  #ffd700;}
+.dashboard #expense {color: #ff2200;}
+
+
+.dashboard form .card {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.card .form-group {
+  padding: 5px;
+  width: 100%;
+}
+
+.card .form-group .form-item {
+  padding: 8px 10px;
+  width: 100%;
+  border-radius: 6px;
+  border: none;
+}
+
+.form-group .btn {
+  padding: 8px 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  color: #fff;
+  background-color: #222;
+}
+
+.font-group .btn:hover,
+.font-group .btn:active {
+  background-color: #fff;
+  color: #222;
+}
+
+.transactions {
+  padding: 10px;
+  background-color: #fff;
+  margin-top: 1rem;
+  border-radius: 10px;
+}
+
+.transactions .title {
+  font-size: 1.2rem;
+  font-weight: 800;
+}
+
+.transactions .list {
+  list-style: none;
+  padding: 4px;
+}
+
+.transactions .list .list-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border: 1px solid slategray;
+  padding: 4px;
+  margin: 4px;
+  border-radius: 6px;
+}
+
+.list-item .list-left {
   display: flex;
   flex-direction: column;
+}
+
+.list-item .list-right {
+  float: end;
+}
+
+.list-right .btn {
+  padding: 5px 7px;
+  margin-left: 4px;
+  border: none;
+  color:  #fff;
+  cursor: pointer;
+  border-radius: 6px;
+}
+
+.btn-info {background-color: slateblue;}
+.btn-danger {background-color: orangered;}
+
+/* menu css */
+.navbar {
+  width: 100%;
+  background-color: #fff;
+  height: 60px;
+  display: flex;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  padding-left: 1rem;
+  padding-right: 1rem;
 }
 
-.App-link {
-  color: #61dafb;
+.navbar .logo {
+  text-decoration: none;
+  font-size: 1.2rem;
+  color: #01baef;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+.navbar .container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.navbar .container .menu {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.navbar .menu .item .nav-link {
+  text-decoration: none;
+  padding: 10px 12px;
+  color: #222;
+  font-weight: 800;
+}
+
+.form-container {
+  width: 40vw;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 7px;
+}
+
+.form-container .form-group {
+  width: 100%;
+  display: flex;
+  align-items: start;
+  justify-content: start;
+  flex-direction: column;
+  padding: 8px;
+}
+
+.form-container .form-group .form-input {
+  padding: 8px 10px;
+  width: 100%;
+}
+
+
+@media screen and (max-width:880px) {
+  .dashboard {
+    width: 80vw;
   }
-  to {
-    transform: rotate(360deg);
+
+  .form-container {
+    width: 80vw;
   }
 }
