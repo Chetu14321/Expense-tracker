@@ -2,87 +2,78 @@ import React, { useContext, useState } from 'react';
 import { toast } from 'react-toastify';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import  {AppContext} from '../Context/AppProvider'
+import { AppContext } from '../Context/AppProvider';
 
-
-
-const URL = "https://expense-tracker-api-gi5q.onrender.com"; // Backend URL
+const URL = "https://expense-tracker-api-gi5q.onrender.com";
 
 function Login() {
+  const { setIsLogin, setToken } = useContext(AppContext);
+  const [user, setUser] = useState({ email: "", password: "" });
+  const navigate = useNavigate();
 
-    const {setIsLogin,setToken}=useContext(AppContext)
-    const [user, setUser] = useState({
-        email: "",
-        password: ""
-    });
+  const readInput = (e) => {
+    const { name, value } = e.target;
+    setUser((prev) => ({ ...prev, [name]: value }));
+  };
 
-    const navigate = useNavigate();
+  const submitHandler = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await axios.post(`${URL}/api/auth/login`, user);
+      const { loginToken, msg } = response.data;
 
-    const readInput = (e) => {
-        const { name, value } = e.target;
-        setUser({ ...user, [name]: value });
-    };
+      toast.success(msg);
+      setToken(loginToken);
+      setIsLogin(true);
+      sessionStorage.setItem("token", loginToken);
 
-    const submitHandler = async (e) => {
-        e.preventDefault();
-        try {
-           console.log('user',user)
-        
-            await axios.post(`${URL}/api/auth/login`,user)
-            .then(res=>{
-                console.log('user',res.data)
-                toast.success(res.data.msg)
-                setToken(res.data.loginToken)
-                setIsLogin(true)
-                
-                sessionStorage.setItem("token", res.data.loginToken);
-                console.log(res.loginToken)
-                navigate('/')
-            }).catch (err=> toast.error(err.response.data.msg));
-        }catch (err){toast.error(err.message)
+      navigate('/');
+    } catch (err) {
+      const errorMsg =
+        err.response?.data?.msg || "Login failed. Please try again.";
+      toast.error(errorMsg);
+    }
+  };
 
-        }
-    };
-
-    return (
-        <div className="container">
-            <div className="title">
-                <h3>Login</h3>
-            </div>
-
-            <div className="form-container">
-                <form method="post" onSubmit={submitHandler}>
-                    <div className="form-group">
-                        <label htmlFor="email">Your Email</label>
-                        <input
-                            type="email"
-                            name="email"
-                            value={user.email}
-                            onChange={readInput}
-                            id="email"
-                            className="form-input"
-                            required
-                        />
-                    </div>
-                    <div className="form-group">
-                        <label htmlFor="password">Your Password</label>
-                        <input
-                            type="password"
-                            name="password"
-                            value={user.password}
-                            onChange={readInput}
-                            id="password"
-                            className="form-input"
-                            required
-                        />
-                    </div>
-                    <div className="form-group">
-                        <input type="submit" value="Login" className="btn" />
-                    </div>
-                </form>
-            </div>
-        </div>
-    );
+  return (
+    <div className="container d-flex align-items-center justify-content-center min-vh-100 bg-light">
+      <div className="col-md-6 col-lg-5 shadow-lg p-4 rounded bg-white">
+        <h3 className="text-center mb-4">Login to Your Account</h3>
+        <form onSubmit={submitHandler}>
+          <div className="mb-3">
+            <label htmlFor="email" className="form-label">Email address</label>
+            <input
+              type="email"
+              className="form-control"
+              id="email"
+              name="email"
+              value={user.email}
+              onChange={readInput}
+              required
+            />
+          </div>
+          <div className="mb-3">
+            <label htmlFor="password" className="form-label">Password</label>
+            <input
+              type="password"
+              className="form-control"
+              id="password"
+              name="password"
+              value={user.password}
+              onChange={readInput}
+              required
+            />
+          </div>
+          <div className="d-grid">
+            <button type="submit" className="btn btn-primary">Login</button>
+          </div>
+        </form>
+        <p className="text-center mt-3">
+          Don’t have an account? <span className="text-primary" style={{ cursor: 'pointer' }}>Register here</span>
+        </p>
+      </div>
+    </div>
+  );
 }
 
 export default Login;

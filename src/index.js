@@ -7,6 +7,8 @@ import reportWebVitals from './reportWebVitals';
 // ccs files
 import "react-toastify/ReactToastify.css"
 import "bootstrap-icons/font/bootstrap-icons.css"
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 
 // app provider component
 import AppProvider from './Context/AppProvider';
